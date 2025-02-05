@@ -1,7 +1,4 @@
 using string_crypter;
-
-namespace CrypterTests;
-
 public class UnitTest1
 {
     [Fact]
