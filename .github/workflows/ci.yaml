@@ -1,0 +1,60 @@
+name: Build, test and push to aws
+
+on:
+  push:
+    branches:
+      - main
+
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: 8.x
+
+      - name: Restore dependencies
+        run: dotnet restore
+
+      - name: Build solution
+        run: dotnet build --no-restore --configuration Debug
+
+      - name: Run tests
+        run: dotnet test --no-build --configuration Debug --verbosity diagnostic
+
+
+  # deploy:
+  #   runs-on: ubuntu-latest
+  #   needs: build
+
+  #   steps:
+  #     - name: checkout repo
+  #       uses: actions/checkout@v3
+
+  #     - name: Setup dotnet
+  #       uses: actions/setup-dotnet@v3
+  #       with: 
+  #         dotnet-version: '8.0'
+
+  #     - name: Build project  
+  #       run: dotnet restore; dotnet publish -o site;
+
+  #     - name: create zip package
+  #       run: cd site; zip ../site.zip *;
+
+  #     - name: Deploy to aws EB
+  #       uses: einaregilsson/beanstalk-deploy@v21
+  #       with:
+  #         aws_access_key: ${{ secrets.AWS_SWEBUS_ACCESS_KEY }}
+  #         aws_secret_key: ${{ secrets.AWS_SWEBUS_SECRET_KEY }}
+  #         application_name: SwebusAPI_One
+  #         environment_name: SwebusAPIOne-env
+  #         version_label: ${{ github.run_id }}
+  #         region: us-east-1
+  #         deployment_package: site.zip
