@@ -52,7 +52,7 @@ jobs:
         with:
           aws_access_key: ${{ secrets.AWS_SWEBUS_ACCESS_KEY }}
           aws_secret_key: ${{ secrets.AWS_SWEBUS_SECRET_KEY }}
-          application_name: SebastianLinden-String_Crypter
+          application_name: SebastianLinden-StringCrypter
           environment_name: SebastianLinden-StringCrypter-env
           version_label: ${{ github.run_id }}
           region: us-east-1
