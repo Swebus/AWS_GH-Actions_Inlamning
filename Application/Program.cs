@@ -7,6 +7,8 @@ var app = builder.Build();
 app.MapGet("/", () => "To encrypt a string is the following endpoint: ?inputString=<stringtoencrypt>");
 
 
-app.MapGet("/Encrypt", (string inputString) => Encrypter.EncryptString(inputString));
+app.MapGet("/Encrypt", (string input) => Encrypter.EncryptString(input));
+
+app.MapGet("/Decrypt", (string input) => Decrypter.DecryptString(input));
 
 app.Run();
