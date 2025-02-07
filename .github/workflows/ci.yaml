@@ -3,7 +3,7 @@ name: Build, test and push to aws
 on:
   push:
     branches:
-      - '**'
+      - 'main'
 
 
 jobs:
